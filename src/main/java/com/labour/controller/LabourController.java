@@ -16,7 +16,8 @@ public class LabourController {
     @Autowired
     private LabourService labourService;
 
-    @GetMapping
+    //fetching csrf token
+    @GetMapping("/csrf")
     public ResponseEntity<String> home() {
         return ResponseEntity.ok("OK");
     }
