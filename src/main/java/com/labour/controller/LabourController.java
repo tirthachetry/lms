@@ -10,25 +10,30 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/labour")
+@RequestMapping("/")
 public class LabourController {
 
     @Autowired
     private LabourService labourService;
 
-    @PostMapping("/add")
+    @GetMapping
+    public ResponseEntity<String> home() {
+        return ResponseEntity.ok("OK");
+    }
+
+    @PostMapping("/api/labour/add")
     public ResponseEntity<String> addLabour(@RequestBody Labour labour) {
         Labour savedLabour = labourService.addLabour(labour);
         return ResponseEntity.ok("Labour added successfully: " + savedLabour.getName());
     }
 
-    @GetMapping("/location/{location}")
+    @GetMapping("/api/labour/location/{location}")
     public ResponseEntity<List<Labour>> getLaboursByLocation(@PathVariable String location) {
         List<Labour> labours = labourService.getLabourByLocation(location);
         return ResponseEntity.ok(labours);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/api/labour/{id}")
     public ResponseEntity<String> updateLabour(@PathVariable Long id, @RequestBody Labour updated) {
         Optional<Labour> labourOpt = labourService.getLabourById(id);
         if (labourOpt.isEmpty()) return ResponseEntity.notFound().build();
