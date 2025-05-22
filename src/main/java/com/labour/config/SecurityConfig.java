@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -31,7 +32,9 @@ public class SecurityConfig{
                                 .requestMatchers(HttpMethod.PUT, "/api/labour/**").authenticated()
                                 .anyRequest().permitAll())
                 .cors(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())  // 👈 Sets XSRF-TOKEN cookie
+                )
                 .formLogin(login -> login
                         .loginProcessingUrl("/login")
                         .successHandler((req, res, auth) -> res.setStatus(200))
