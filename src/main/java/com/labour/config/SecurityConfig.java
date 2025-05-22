@@ -31,6 +31,7 @@ public class SecurityConfig{
                                 .requestMatchers(HttpMethod.PUT, "/api/labour/**").authenticated()
                                 .anyRequest().permitAll())// All other requests require authentication
                 .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(login -> login
                         .loginProcessingUrl("/login") // API endpoint for login
                         .successHandler((req, res, auth) -> res.setStatus(200)) // No redirect
