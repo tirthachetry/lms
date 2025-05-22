@@ -27,7 +27,6 @@ public class SecurityConfig{
         httpSecurity
                 .authorizeHttpRequests(auth ->
                         auth
-                                .requestMatchers("/").permitAll()
                                 .requestMatchers("/api/labour/location/**").permitAll()  // give any of your 'get' request endpoint
                                 .requestMatchers("/api/labour/add").authenticated()
                                 .requestMatchers(HttpMethod.PUT, "/api/labour/**").authenticated()
