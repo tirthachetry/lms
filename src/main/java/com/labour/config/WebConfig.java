@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer{
     public void addCorsMappings(CorsRegistry registry) {
         // Allow all requests from localhost:3000 (where React runs)
         registry.addMapping("/**")
-                .allowedOrigins("*") // React app
+                .allowedOrigins("https://lms-ui-two.vercel.app") // React app
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // Allowed HTTP methods
                 .allowedHeaders("*") // Allowed headers
                 .allowCredentials(true);
