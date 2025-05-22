@@ -33,6 +33,7 @@ public class SecurityConfig{
                                 .anyRequest().permitAll())
                 .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/login")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())  // 👈 Sets XSRF-TOKEN cookie
                 )
                 .formLogin(login -> login
