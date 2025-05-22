@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: Labour Management System
+  datasource:
+    url: jdbc:postgresql://localhost:5432/twitter_db
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create  # use 'create', 'create-drop', or 'validate' depending on your needs
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    root: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
