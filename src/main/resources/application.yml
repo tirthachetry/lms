@@ -21,3 +21,4 @@ logging:
     root: DEBUG
     org.springframework.security: DEBUG
     org.springframework.web: DEBUG
+    org.apache.coyote.http11: INFO

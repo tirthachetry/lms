@@ -24,21 +24,20 @@ public class SecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         // Disable CSRF for simplicity, not recommended for production
         httpSecurity
-                .authorizeHttpRequests(auth->
+                .authorizeHttpRequests(auth ->
                         auth
                                 .requestMatchers("/api/labour/location/**").permitAll()  // give any of your 'get' request endpoint
                                 .requestMatchers("/api/labour/add").authenticated()
                                 .requestMatchers(HttpMethod.PUT, "/api/labour/**").authenticated()
-                                .anyRequest().permitAll())// All other requests require authentication
+                                .anyRequest().permitAll())
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(login -> login
-                        .loginProcessingUrl("/login") // API endpoint for login
-                        .successHandler((req, res, auth) -> res.setStatus(200)) // No redirect
+                        .loginProcessingUrl("/login")
+                        .successHandler((req, res, auth) -> res.setStatus(200))
                         .failureHandler((req, res, ex) -> res.sendError(401, "Authentication Failed"))
                         .permitAll()
-                )  // Enable form login here I use default login
-
+                )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessHandler((request, response, authentication) -> {
